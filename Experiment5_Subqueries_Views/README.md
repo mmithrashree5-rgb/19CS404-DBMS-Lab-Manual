@@ -37,124 +37,411 @@ DROP VIEW view_name;
 ```
 
 **Question 1**
---
--- Paste Question 1 here
+--Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose Address as Delhi
+
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+
+7           Muffy          24              Indore            10000
+
+ 
+ 
+
+For example:
+
+Result
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+2           Khilan      25          Delhi       1500
+
 
 ```sql
--- Paste your SQL code below for Question 1
-```
+
+```SELECT*FROM CUSTOMERS WHERE ADDRESS='Delhi';
 
 **Output:**
 
-![Output1](output.png)
+<img width="655" height="302" alt="image" src="https://github.com/user-attachments/assets/b7ac16d7-81de-4a3e-ab5b-04ccdc3c6cc7" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+-From the following tables write a SQL query to find the order values greater than the average order value of 10th October 2012. Return ord_no, purch_amt, ord_date, customer_id, salesman_id.
+
+Note: date should be yyyy-mm-dd format
+
+ORDERS TABLE
+
+name            type
+----------     ----------
+ord_no          int
+purch_amt    real
+ord_date       text
+customer_id  int
+salesman_id  int
+
+For example:
+
+Result
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------
+70005       2400.6      2012-07-27  3007         5001
+70008       5760.0      2012-09-10  3002         5001
+70003       2480.4      2012-10-10  3009         5003
+70013       3045.6      2012-04-25  3002         5001
 
 ```sql
--- Paste your SQL code below for Question 2
-```
+
+```SELECT ord_no, purch_amt, ord_date, customer_id, salesman_id
+FROM orders
+WHERE purch_amt > (
+    SELECT AVG(purch_amt)
+    FROM orders
+    WHERE ord_date = '2012-10-10'
+);
 
 **Output:**
+<img width="601" height="382" alt="image" src="https://github.com/user-attachments/assets/a31070f9-f7cf-43b4-8a22-98b8570e817c" />
 
-![Output2](output.png)
 
 **Question 3**
 ---
--- Paste Question 3 here
+-Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is LESS than $2500.
+
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+
+7           Muffy          24              Indore            10000
+
+ 
+ 
+
+For example:
+
+Result
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+1           Ramesh      32          Ahmedabad   2000
+2           Khilan      25          Delhi       1500
+3           Kaushik     23          Kota        2000
+
 
 ```sql
--- Paste your SQL code below for Question 3
-```
+-- 
+```SELECT *
+FROM CUSTOMERS
+WHERE SALARY < 2500;
 
 **Output:**
+<img width="598" height="396" alt="image" src="https://github.com/user-attachments/assets/85c36933-4c26-45ac-bd9b-cf25b5a3b249" />
 
-![Output3](output.png)
 
 **Question 4**
 ---
--- Paste Question 4 here
+From the following tables, write a SQL query to find those salespeople who earned the maximum commission. Return ord_no, purch_amt, ord_date, and salesman_id.
+
+salesman table
+
+name             type
+---------------  ---------------
+salesman_id      numeric(5)
+name                 varchar(30)
+city                    varchar(15)
+commission       decimal(5,2)
+
+orders table
+
+name             type
+---------------  --------
+order_no         int
+purch_amt        real
+order_date       text
+customer_id      int
+salesman_id      int
+ 
+
+For example:
+
+Result
+ord_no      purch_amt   ord_date    salesman_id
+----------  ----------  ----------  -----------
+70002       65.26       2012-10-05  5001
+70005       2400.6      2012-07-27  5001
+70008       5760.0      2012-09-10  5001
+70013       3045.6      2012-04-25  5001
+
 
 ```sql
--- Paste your SQL code below for Question 4
+-SELECT o.ord_no, o.purch_amt, o.ord_date, o.salesman_id
+FROM orders o
+JOIN salesman s
+ON o.salesman_id = s.salesman_id
+WHERE s.commission = (
+    SELECT MAX(commission)
+    FROM salesman
+);
 ```
 
 **Output:**
+<img width="535" height="462" alt="image" src="https://github.com/user-attachments/assets/c63c100a-2c6a-4b88-a735-716e1be39074" />
 
-![Output4](output.png)
+
 
 **Question 5**
----
--- Paste Question 5 here
+---From the following tables, write a SQL query to find all the orders generated in New York city. Return ord_no, purch_amt, ord_date, customer_id and salesman_id.
+
+SALESMAN TABLE
+
+name               type
+-----------        ----------
+salesman_id  numeric(5)
+name             varchar(30)
+city                 varchar(15)
+commission   decimal(5,2)
+
+ORDERS TABLE
+
+name            type
+----------      ----------
+ord_no          int
+purch_amt    real
+ord_date       text
+customer_id  int
+salesman_id  int
+
+For example:
+
+Result
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------
+70002       65.26       2012-10-05  3002         5001
+70005       2400.6      2012-07-27  3007         5001
+70008       5760.0      2012-09-10  3002         5001
+70013       3045.6      2012-04-25  3002         5001
+
+-
 
 ```sql
--- Paste your SQL code below for Question 5
-```
+```SELECT o.ord_no, o.purch_amt, o.ord_date,
+       o.customer_id, o.salesman_id
+FROM orders o
+JOIN salesman s
+ON o.salesman_id = s.salesman_id
+WHERE s.city = 'New York';
 
 **Output:**
+<img width="585" height="412" alt="image" src="https://github.com/user-attachments/assets/e4730efc-d01d-4c12-a221-291c43174378" />
 
-![Output5](output.png)
 
 **Question 6**
----
--- Paste Question 6 here
+---From the following tables write a SQL query to find all orders generated by London-based salespeople. Return ord_no, purch_amt, ord_date, customer_id, salesman_id.
+
+salesman table
+
+name             type
+---------------  ---------------
+salesman_id      numeric(5)
+name                 varchar(30)
+city                    varchar(15)
+commission       decimal(5,2)
+
+orders table
+
+name             type
+---------------  --------
+order_no         int
+purch_amt        real
+order_date       text
+customer_id      int
+salesman_id      int
+ 
+
+For example:
+
+Result
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+----------  ----------  ----------  -----------  -----------
+70009       270.65      2012-09-10  3001         5005
+
 
 ```sql
--- Paste your SQL code below for Question 6
-```
+```SELECT o.ord_no, o.purch_amt, o.ord_date,
+       o.customer_id, o.salesman_id
+FROM orders o
+JOIN salesman s
+ON o.salesman_id = s.salesman_id
+WHERE s.city = 'London';
 
 **Output:**
+<img width="617" height="393" alt="image" src="https://github.com/user-attachments/assets/0d2d39c8-8584-49c3-8253-1593988ea54d" />
 
-![Output6](output.png)
 
 **Question 7**
----
--- Paste Question 7 here
+---Write a SQL query to Find employees who have an age less than the average age of employees with incomes over 2.5 Lakh
+
+Employee Table
+
+name             type
+
+------------   ---------------
+
+id                    INTEGER
+
+name              TEXT
+
+age                 INTEGER
+
+city                 TEXT
+
+income           INTEGER
+
+For example:
+
+Result
+id     name             age              city             income
+-----  ---------------  ---------------  ---------------  ----------
+101    Peter            32               NewYork          200000
+102    Mark             32               California       300000
+103    Donald           25               Arizona          1000000
+104    Obama            35               Florida          5000000
+105    Linklon          32               Georgia          250000
+107    Adam             35               California       5000000
+
 
 ```sql
--- Paste your SQL code below for Question 7
 ```
-
+SELECT *
+FROM Employee
+WHERE age < (
+    SELECT AVG(age)
+    FROM Employee
+    WHERE income > 250000
+);
 **Output:**
 
-![Output7](output.png)
+<img width="682" height="482" alt="image" src="https://github.com/user-attachments/assets/875c0116-bf36-4667-8700-cef1b0affdc9" />
 
 **Question 8**
----
--- Paste Question 8 here
+---Write a SQL query to Identify customers whose city is different from the city of the customer with the highest ID
+
+SAMPLE TABLE: customer
+
+name             type
+---------------  ---------------
+id               INTEGER
+name             TEXT
+city             TEXT
+email            TEXT
+phone            INTEGER
+For example:
+
+Result
+id     name             city             email            phone
+-----  ---------------  ---------------  ---------------  ----------
+6      Aarti Desai      Pune             aarti@gmail.com  890123456
+7      Vivek Sharma     Chandigarh       vivek@gmail.com  980154021
+8      Nisha Patel      Noida            nisha@gmail.com  901234567
+9      Rajesh Singh     Hyderabad        rajesh@gmail.co  917654301
 
 ```sql
--- Paste your SQL code below for Question 8
-```
+```SELECT *
+FROM customer
+WHERE city <> (
+    SELECT city
+    FROM customer
+    WHERE id = (SELECT MAX(id) FROM customer)
+);
 
 **Output:**
+<img width="693" height="398" alt="image" src="https://github.com/user-attachments/assets/03b3214a-2d62-407d-80ed-e6dc8df27e37" />
 
-![Output8](output.png)
 
 **Question 9**
----
--- Paste Question 9 here
+---Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose Address as Delhi and age below 30
+
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+
+7           Muffy          24              Indore            10000
+
+ 
+ 
+
+For example:
+
+Result
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+2           Khilan      25          Delhi       1500
+
 
 ```sql
--- Paste your SQL code below for Question 9
-```
+```SELECT ID, NAME, AGE, ADDRESS, SALARY
+FROM CUSTOMERS
+WHERE ADDRESS = 'Delhi'
+  AND AGE < 30
+ORDER BY ID;
 
 **Output:**
+<img width="602" height="332" alt="image" src="https://github.com/user-attachments/assets/f2a00d01-562a-4b00-8f05-8fe5bbacfbdd" />
 
-![Output9](output.png)
 
 **Question 10**
----
--- Paste Question 10 here
+---Write a SQL query that retrieves the names of students and their corresponding grades, where the grade is equal to the maximum grade achieved in each subject.
+
+Sample table: GRADES (attributes: student_id, student_name, subject, grade)
+
+
+
+For example:
+
+Result
+student_name     grade
+---------------  ---------------
+Charlie          95
+Emma             92
+John             85
+
 
 ```sql
--- Paste your SQL code below for Question 10
-```
+```SELECT student_name, grade
+FROM GRADES g
+WHERE grade = (
+    SELECT MAX(grade)
+    FROM GRADES
+    WHERE subject = g.subject
+);
 
 **Output:**
+<img width="392" height="411" alt="image" src="https://github.com/user-attachments/assets/43780f76-fac0-41ff-9ea1-ca4215ad3aa5" />
 
-![Output10](output.png)
 
 
 ## RESULT
