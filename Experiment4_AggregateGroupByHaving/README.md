@@ -37,124 +37,357 @@ HAVING condition;
 ```
 
 **Question 1**
---
--- Paste Question 1 here
+--How many patients are there in each city?
+
+Sample table: Patients Table
+
+
+
+For example:
+
+Result
+Address     TotalPatients
+----------  -------------
+Berlin      3
+Chicago     4
+Mexico      3
+
+-- 
 
 ```sql
--- Paste your SQL code below for Question 1
+--SELECT Address, COUNT(*) AS TotalPatients
+FROM Patients
+GROUP BY Address;
 ```
 
 **Output:**
+<img width="322" height="357" alt="image" src="https://github.com/user-attachments/assets/0934085d-f79a-4f20-9e93-acdfda17fb6e" />
 
-![Output1](output.png)
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+--How many prescriptions were written by each doctor?
+
+Sample tablePrescriptions Table
+
+
+
+For example:
+
+Result
+DoctorID    TotalPrescriptions
+----------  ------------------
+1           1
+2           1
+3           1
+4           1
+5           1
+6           1
+7           1
+8           1
+9           1
+10          1
 
 ```sql
--- Paste your SQL code below for Question 2
+--
+ SELECT DoctorID, COUNT(*) AS TotalPrescriptions
+FROM Prescriptions
+GROUP BY DoctorID;
+
 ```
 
 **Output:**
 
-![Output2](output.png)
+
+<img width="330" height="685" alt="image" src="https://github.com/user-attachments/assets/74ff3f4b-9888-4b7b-8047-f795e1f57b08" />
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- What is the total number of appointments scheduled by each doctor?
+
+Sample table:Appointments Table
+
+
+
+For example:
+
+Result
+DoctorID    TotalAppointments
+----------  -----------------
+1           1
+2           3
+5           3
+9           2
+10          1
 
 ```sql
--- Paste your SQL code below for Question 3
+-- SELECT DoctorID, COUNT(*) AS TotalAppointments
+FROM Appointments
+GROUP BY DoctorID;
 ```
 
 **Output:**
+<img width="355" height="568" alt="image" src="https://github.com/user-attachments/assets/ceb9c442-060c-4c5d-8e29-a874ed627422" />
 
-![Output3](output.png)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- Write a SQL query to find the number of employees who are having the same age removing the duplicate values.
+
+Sample table: employee
+
+id
+
+name
+
+age
+
+address
+
+salary
+
+1
+
+Paul
+
+32
+
+California
+
+20000
+
+4
+
+Mark
+
+25
+
+Richtown
+
+65000
+
+5
+
+David
+
+27
+
+Texas
+
+85000
+
+ 
+
+For example:
+
+Result
+COUNT
+----------
+4
+
 
 ```sql
--- Paste your SQL code below for Question 4
+-- SELECT COUNT(DISTINCT age) AS COUNT
+FROM employee;
 ```
 
 **Output:**
+<img width="367" height="320" alt="image" src="https://github.com/user-attachments/assets/cc18e97a-309d-4830-bcc4-32dc920a81a4" />
 
-![Output4](output.png)
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+--Write a SQL query to count the number of customers. Return number of customers.
+
+Sample table: customer
+
+customer_id |   cust_name    |    city    | grade | salesman_id 
+
+-------------+----------------+------------+-------+-------------
+
+        3002 | Nick Rimando   | New York   |   100 |        5001
+
+        3007 | Brad Davis     | New York   |   200 |        5001
+
+        3005 | Graham Zusi    | California |   200 |        5002
+
+ 
+
+For example:
+
+Result
+COUNT
+----------
+8
+
 
 ```sql
--- Paste your SQL code below for Question 5
-```
+--
+```SELECT COUNT(*) AS COUNT
+FROM customer;
 
 **Output:**
 
-![Output5](output.png)
+<img width="368" height="317" alt="image" src="https://github.com/user-attachments/assets/49cba121-8e1b-4f6f-8a18-93301247c16f" />
 
 **Question 6**
----
--- Paste Question 6 here
+---Write a SQL query to determine the number of customers who received at least one grade for their activity.
+
+Sample table: customer
+
+customer_id |   cust_name    |    city    | grade | salesman_id 
+
+-------------+----------------+------------+-------+-------------
+
+        3002 | Nick Rimando   | New York   |   100 |        5001
+
+        3007 | Brad Davis     | New York   |   200 |        5001
+
+        3005 | Graham Zusi    | California |   200 |        5002
+
+ 
+
+For example:
+
+Result
+COUNT
+----------
+8
+
+--
 
 ```sql
--- Paste your SQL code below for Question 6
+-- SELECT COUNT(*) AS COUNT
+FROM customer
+WHERE grade IS NOT NULL;
 ```
 
 **Output:**
+<img width="347" height="288" alt="image" src="https://github.com/user-attachments/assets/73db7525-cc85-45b2-a994-cac79cd6b7eb" />
 
-![Output6](output.png)
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- Write a SQL query to find What is the age difference between the youngest and oldest employee in the company.
+
+Table: employee
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+age         INTEGER
+city        TEXT
+income      INTEGER
+For example:
+
+Result
+age_difference
+--------------
+13
+
 
 ```sql
--- Paste your SQL code below for Question 7
-```
+-- 
+```SELECT MAX(age) - MIN(age) AS age_difference
+FROM employee;
 
 **Output:**
+<img width="462" height="240" alt="image" src="https://github.com/user-attachments/assets/db4c35a8-ef03-438f-9118-06cd3b1356f6" />
 
-![Output7](output.png)
+
 
 **Question 8**
----
--- Paste Question 8 here
+---Write the SQL query that accomplishes the grouping of data by addresses, calculates the sum of salaries for each address, and excludes addresses where the total salary sum is not greater than 2000.
+
+Sample table: customer1
+
+
+
+For example:
+
+Result
+address     SUM(salary)
+----------  -----------
+Bhopal      8500
+Hyderabad   4500
+Indore      10000
+Mumbai      6500
+
+-- 
 
 ```sql
--- Paste your SQL code below for Question 8
+--SELECT address, SUM(salary) AS "SUM(salary)"
+FROM customer1
+GROUP BY address
+HAVING SUM(salary) > 2000;
 ```
 
 **Output:**
-
-![Output8](output.png)
+<img width="617" height="437" alt="image" src="https://github.com/user-attachments/assets/687007ef-fc12-4d4c-8680-102071227614" />
 
 **Question 9**
----
--- Paste Question 9 here
+---Write the SQL query that achieves the grouping of data by occupation, calculates the minimum work hours for each occupation, and excludes occupations where the minimum work hour is not greater than 8.
+
+Sample table: employee1
+
+
+
+For example:
+
+Result
+occupation  MIN(workhour)
+----------  -------------
+Business    10
+Doctor      15
+Engineer    12
+Teacher     9
+
+-- 
 
 ```sql
--- Paste your SQL code below for Question 9
+--SELECT occupation, MIN(workhour) AS "MIN(workhour)"
+FROM employee1
+GROUP BY occupation
+HAVING MIN(workhour) > 8;
 ```
 
 **Output:**
+<img width="620" height="422" alt="image" src="https://github.com/user-attachments/assets/2204669d-f979-4ab5-87c0-e274e3b92980" />
 
-![Output9](output.png)
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- Write an SQL query that groups the customer data into 5-year age intervals, calculates the minimum salary for each group, and excludes groups where the minimum salary is not less than 2000.
+
+Table: customer1
+
+
+
+For example:
+
+Result
+age_group   MIN(salary)
+----------  -----------
+25          1500
+
 
 ```sql
--- Paste your SQL code below for Question 10
-```
+--
+```SELECT (age / 5) * 5 AS age_group,
+       MIN(salary) AS "MIN(salary)"
+FROM customer1
+GROUP BY (age / 5) * 5
+HAVING MIN(salary) < 2000;
 
 **Output:**
+<img width="602" height="283" alt="image" src="https://github.com/user-attachments/assets/8a8c165e-063f-466f-b046-d643120c452c" />
 
-![Output10](output.png)
+
 
 
 ## RESULT
